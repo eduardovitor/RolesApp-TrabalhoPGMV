@@ -1,3 +1,4 @@
+import 'package:rolesapp/custom_colors.dart';
 import 'package:rolesapp/myforminput.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: MyForm());
+    return const Scaffold(body: MyForm(), backgroundColor: CustomColors.gray);
   }
 }
 
@@ -28,8 +29,8 @@ class _MyFormState extends State<MyForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formkey,
-        child: ListView(padding: EdgeInsets.all(16), children: <Widget>[
-          const SizedBox(height: 150),
+        child: ListView(padding: const EdgeInsets.all(16), children: <Widget>[
+          const SizedBox(height: 130),
           const MyFormInput(
               label: 'Email',
               hint: 'Digite o email',
@@ -44,12 +45,11 @@ class _MyFormState extends State<MyForm> {
           const SizedBox(height: 15),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  minimumSize: Size(150, 40),
-                  primary: Color(0xFF61b98e),
-                  onPrimary: Colors.white,
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0),
-                  )),
+                minimumSize: const Size(150, 40),
+                primary: CustomColors.red,
+                onPrimary: Colors
+                    .white, // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),)
+              ),
               onPressed: () {
                 if (_formkey.currentState!.validate()) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -61,7 +61,7 @@ class _MyFormState extends State<MyForm> {
                   // );
                 }
               },
-              child: Text("Entrar")),
+              child: const Text("Entrar")),
         ]));
   }
 }
@@ -71,7 +71,7 @@ buildRowOpcoes() {
     children: [
       CheckButtonWidget(),
       Text('Permanecer logado ?', style: TextStyle(fontSize: 11)),
-      const SizedBox(width: 35),
+      SizedBox(width: 35),
       Text('Esqueceu a senha ?', style: TextStyle(fontSize: 11))
     ],
   );
@@ -94,7 +94,7 @@ class _CheckButtonWidgetState extends State<CheckButtonWidget> {
         MaterialState.hovered,
         MaterialState.focused,
       };
-      return const Color(0xFF61b98e);
+      return CustomColors.red;
     }
 
     return Checkbox(
