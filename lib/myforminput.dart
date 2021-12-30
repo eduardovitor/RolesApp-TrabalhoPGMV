@@ -6,14 +6,14 @@ class MyFormInput extends StatelessWidget {
   final String? changedValue;
   final String? label;
   final String? hint;
-  final bool? isTextObscured;
+  final bool isTextObscured;
   final String? Function(String?)? validator;
 
   const MyFormInput(
       {Key? key,
       this.changedValue,
       this.label,
-      this.isTextObscured,
+      this.isTextObscured = false,
       this.validator,
       this.hint})
       : super(key: key);
@@ -21,19 +21,18 @@ class MyFormInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        validator: validator,
-        cursorColor: CustomColors.red,
-        decoration: InputDecoration(
+      obscureText: isTextObscured,
+      validator: validator,
+      cursorColor: CustomColors.purple,
+      decoration: InputDecoration(
           labelText: label,
           hintText: hint,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-
-          // border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          // focusedBorder: OutlineInputBorder(
-
-          //     borderRadius: BorderRadius.circular(30),
-          //     borderSide: const BorderSide(color: CustomColors.red))),
-        ));
+          border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
+          focusedBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+              borderSide: BorderSide(color: CustomColors.purple))),
+    );
   }
 }
 

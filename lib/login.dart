@@ -1,6 +1,9 @@
+import 'package:rolesapp/cadastro.dart';
 import 'package:rolesapp/custom_colors.dart';
 import 'package:rolesapp/myforminput.dart';
 import 'package:flutter/material.dart';
+
+import 'home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -39,14 +42,15 @@ class _MyFormState extends State<MyForm> {
           const MyFormInput(
               label: 'Senha',
               hint: 'Digite a senha',
-              validator: checkFieldEmpty),
+              validator: checkFieldEmpty,
+              isTextObscured: true),
           const SizedBox(height: 25),
           buildRowOpcoes(),
           const SizedBox(height: 15),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(150, 40),
-                primary: CustomColors.red,
+                primary: CustomColors.purple,
                 onPrimary: Colors
                     .white, // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),)
               ),
@@ -55,13 +59,24 @@ class _MyFormState extends State<MyForm> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('')),
                   );
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => Home()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
                 }
               },
               child: const Text("Entrar")),
+          TextButton(
+              style: TextButton.styleFrom(
+                primary: CustomColors.black,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Cadastro()),
+                );
+              },
+              child: const Text('Não tem conta? Cadastre-se'))
         ]));
   }
 }
@@ -94,7 +109,7 @@ class _CheckButtonWidgetState extends State<CheckButtonWidget> {
         MaterialState.hovered,
         MaterialState.focused,
       };
-      return CustomColors.red;
+      return CustomColors.purple;
     }
 
     return Checkbox(

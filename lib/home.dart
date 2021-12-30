@@ -1,3 +1,7 @@
+import 'package:rolesapp/createRole.dart';
+import 'package:rolesapp/feed.dart';
+import 'package:rolesapp/perfil.dart';
+
 import 'custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -13,25 +17,17 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   Widget build(BuildContext context) {
     const List<Widget> _pages = <Widget>[
-      Text(
-        'Página1'
-      ),
-      Text(
-        'Página2'
-      ),
-      Text(
-        'Página3'
-      ),
-      Text(
-        'Página4'
-      )
+      Feed(),
+      CreateRole(),
+      Text('Página3'),
+      Perfil()
     ];
     return Scaffold(
       body: Center(child: _pages.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: CustomColors.red,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: CustomColors.purple,
+        unselectedItemColor: CustomColors.DimGray,
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
@@ -41,7 +37,7 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Adicionar Rolê',
+            label: 'Rolês',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.group),

@@ -1,21 +1,35 @@
-import 'custom_colors.dart';
 import 'package:flutter/material.dart';
 
-import 'home.dart';
+import 'custom_colors.dart';
 import 'myforminput.dart';
 
-class Cadastro extends StatefulWidget {
-  const Cadastro({Key? key}) : super(key: key);
+class Perfil extends StatefulWidget {
+  const Perfil({Key? key}) : super(key: key);
 
   @override
-  _CadastroState createState() => _CadastroState();
+  _PerfilState createState() => _PerfilState();
 }
 
-class _CadastroState extends State<Cadastro> {
+class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: MyForm());
+    return Scaffold(body: buildBody());
   }
+}
+
+buildBody() {
+  return Column(
+    children: [buildPlaceHolder(), MyForm()],
+  );
+}
+
+buildPlaceHolder() {
+  return const Padding(
+      padding: EdgeInsets.all(16),
+      child: Placeholder(
+        fallbackWidth: 150,
+        fallbackHeight: 150,
+      ));
 }
 
 class MyForm extends StatefulWidget {
@@ -31,7 +45,9 @@ class _MyFormState extends State<MyForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formkey,
-        child: ListView(padding: EdgeInsets.all(16), children: <Widget>[
+        child: Expanded(
+            child:
+                ListView(padding: const EdgeInsets.all(16), children: <Widget>[
           const SizedBox(height: 30),
           const MyFormInput(
               label: 'Nome', hint: 'Digite o nome', validator: checkFieldEmpty),
@@ -57,35 +73,21 @@ class _MyFormState extends State<MyForm> {
               validator: checkFieldEmpty,
               isTextObscured: true),
           const SizedBox(height: 15),
-          const MyFormInput(
-              label: 'Bebe?',
-              hint: 'Digite sim (bebo) ou não (não bebo)',
-              validator: checkFieldEmpty),
+          const MyFormInput(label: 'Bebe?', validator: checkFieldEmpty),
           const SizedBox(height: 15),
-          const MyFormInput(
-              label: 'Fuma?',
-              hint: 'Digite sim (fumo) ou não (não fumo)',
-              validator: checkFieldEmpty),
+          const MyFormInput(label: 'Fuma?', validator: checkFieldEmpty),
           const SizedBox(height: 15),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(150, 40),
+                minimumSize: const Size(150, 40),
                 primary: CustomColors.purple,
                 onPrimary: Colors.white,
-                //  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
+                //   shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
               ),
               onPressed: () {
-                if (_formkey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('')),
-                  );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
-                }
+                if (_formkey.currentState!.validate()) {}
               },
-              child: Text("Cadastrar")),
-        ]));
+              child: const Text("Salvar alterações")),
+        ])));
   }
 }
