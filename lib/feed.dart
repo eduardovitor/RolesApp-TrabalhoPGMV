@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rolesapp/card_role.dart';
+import 'package:rolesapp/data/role_dao.dart';
 
 import 'custom_colors.dart';
+import 'domain/roles.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -11,37 +13,38 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
+  late Future<List<Roles>> lista_roles;
+
+  @override
+  void initState() {
+    super.initState();
+    lista_roles = RoleDao().findAll();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: buildRolesView());
+    return Scaffold(body: buildFutureBuilder());
   }
-}
 
-buildRolesView() {
-  return ListView(padding: const EdgeInsets.all(16), children: [
-    CardRole(
-        criador: 'Eduardo Vitor',
-        nome: 'Passeio no bosque',
-        imagem:
-            'https://arapiraca.nyc3.cdn.digitaloceanspaces.com/2019/03/fonteluninosa-1.jpeg',
-        data: '03/02/2021',
-        horario: '15:30',
-        local: 'Bosque das Arapiracas'),
-    CardRole(
-        criador: 'Eduardo Vitor',
-        nome: 'Passeio no bosque',
-        imagem:
-            'https://arapiraca.nyc3.cdn.digitaloceanspaces.com/2019/03/fonteluninosa-1.jpeg',
-        data: '03/02/2021',
-        horario: '15:30',
-        local: 'Bosque das Arapiracas'),
-    CardRole(
-        criador: 'Eduardo Vitor',
-        nome: 'Passeio no bosque',
-        imagem:
-            'https://arapiraca.nyc3.cdn.digitaloceanspaces.com/2019/03/fonteluninosa-1.jpeg',
-        data: '03/02/2021',
-        horario: '15:30',
-        local: 'Bosque das Arapiracas')
-  ]);
+  buildListView(List<Roles>? lista_roles) {
+    return ListView.builder(
+      itemCount: lista_roles!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return CardRole(role: lista_roles[index]);
+      },
+    );
+  }
+
+  buildFutureBuilder() {
+    return FutureBuilder<List<Roles>>(
+      future: lista_roles,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return buildListView(snapshot.data);
+        }
+
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
+  }
 }

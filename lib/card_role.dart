@@ -1,41 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'custom_colors.dart';
+import 'domain/roles.dart';
 
 class CardRole extends StatefulWidget {
-  final String criador;
-  final String nome;
-  final String imagem;
-  final String data;
-  final String horario;
-  final String local;
-  final int? visualizacoes;
-  final int? confirmacoes;
-  const CardRole(
-      {Key? key,
-      required this.criador,
-      required this.nome,
-      required this.imagem,
-      required this.data,
-      required this.horario,
-      required this.local,
-      this.visualizacoes = 0,
-      this.confirmacoes = 0})
-      : super(key: key);
+  final Roles role;
+  const CardRole({Key? key, required this.role}) : super(key: key);
 
   @override
   _CardRoleState createState() => _CardRoleState();
 }
 
 class _CardRoleState extends State<CardRole> {
-  String get criador => widget.criador;
-  String get nome => widget.nome;
-  String get imagem => widget.imagem;
-  String get data => widget.data;
-  String get horario => widget.horario;
-  String get local => widget.local;
-  int? get visualizacoes => widget.visualizacoes;
-  int? get confirmacoes => widget.confirmacoes;
+  Roles get role => widget.role;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -51,7 +28,8 @@ class _CardRoleState extends State<CardRole> {
   buildRowDataHorario() {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 5),
-        child: Row(children: [Text(data), const Text(','), Text(horario)]));
+        child: Row(
+            children: [Text(role.data), const Text(','), Text(role.horario)]));
   }
 
   buildRowViewsPeople() {
@@ -59,10 +37,10 @@ class _CardRoleState extends State<CardRole> {
         padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 5),
         child: Row(children: [
           Icon(Icons.remove_red_eye),
-          Text(visualizacoes.toString()),
+          Text(role.visualizacoes.toString()),
           SizedBox(width: 30),
           Icon(Icons.person_pin),
-          Text(confirmacoes.toString())
+          Text(role.confirmacoes.toString())
         ]));
   }
 
@@ -71,7 +49,7 @@ class _CardRoleState extends State<CardRole> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          nome,
+          role.nome_role,
           style: const TextStyle(
             color: CustomColors.DimGray,
             fontSize: 20,
@@ -79,17 +57,17 @@ class _CardRoleState extends State<CardRole> {
           ),
         ),
         Text(
-          criador,
+          role.criador,
           style: const TextStyle(
             color: CustomColors.DimGray,
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
         ),
-        Image.network(imagem, height: 150, width: 150),
+        Image.network(role.imagem_local, height: 150, width: 150),
         buildRowDataHorario(),
         Text(
-          local,
+          role.local_curto,
           style: const TextStyle(
             color: CustomColors.DimGray,
             fontSize: 15,
