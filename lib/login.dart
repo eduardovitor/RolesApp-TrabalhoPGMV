@@ -1,5 +1,6 @@
 import 'package:rolesapp/cadastro.dart';
 import 'package:rolesapp/custom_colors.dart';
+import 'package:rolesapp/data/usuario_dao.dart';
 import 'package:rolesapp/myforminput.dart';
 import 'package:flutter/material.dart';
 
@@ -13,37 +14,38 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerSenha = TextEditingController();
   @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: MyForm(), backgroundColor: CustomColors.gray);
+  void initState() {
+    super.initState();
   }
-}
 
-class MyForm extends StatefulWidget {
-  const MyForm({Key? key}) : super(key: key);
-
-  @override
-  _MyFormState createState() => _MyFormState();
-}
-
-class _MyFormState extends State<MyForm> {
-  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    return Scaffold(body: buildBody(), backgroundColor: CustomColors.gray);
+  }
+
+  buildBody() {
     return Form(
         key: _formkey,
         child: ListView(padding: const EdgeInsets.all(16), children: <Widget>[
           const SizedBox(height: 130),
-          const MyFormInput(
-              label: 'Email',
-              hint: 'Digite o email',
-              validator: checkFieldEmpty),
+          MyFormInput(
+            label: 'Email',
+            hint: 'Digite o email',
+            validator: checkFieldEmpty,
+            controller: controllerEmail,
+          ),
           const SizedBox(height: 15),
-          const MyFormInput(
-              label: 'Senha',
-              hint: 'Digite a senha',
-              validator: checkFieldEmpty,
-              isTextObscured: true),
+          MyFormInput(
+            label: 'Senha',
+            hint: 'Digite a senha',
+            validator: checkFieldEmpty,
+            isTextObscured: true,
+            controller: controllerSenha,
+          ),
           const SizedBox(height: 25),
           buildRowOpcoes(),
           const SizedBox(height: 15),
@@ -54,17 +56,7 @@ class _MyFormState extends State<MyForm> {
                 onPrimary: Colors
                     .white, // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),)
               ),
-              onPressed: () {
-                if (_formkey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('')),
-                  );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
-                }
-              },
+              onPressed: onPressed,
               child: const Text("Entrar")),
           TextButton(
               style: TextButton.styleFrom(
@@ -78,6 +70,24 @@ class _MyFormState extends State<MyForm> {
               },
               child: const Text('Não tem conta? Cadastre-se'))
         ]));
+  }
+
+  void onPressed() async {
+    bool isValid = _formkey.currentState!.validate();
+    bool user_exists =
+        await UsuarioDao().login(controllerEmail.text, controllerSenha.text);
+    if (isValid && user_exists) {
+      pushHomePage();
+    }
+  }
+
+  void pushHomePage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Home(),
+      ),
+    );
   }
 }
 

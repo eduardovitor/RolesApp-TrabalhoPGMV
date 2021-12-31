@@ -8,14 +8,15 @@ class MyFormInput extends StatelessWidget {
   final String? hint;
   final bool isTextObscured;
   final String? Function(String?)? validator;
-
+  final TextEditingController? controller;
   const MyFormInput(
       {Key? key,
       this.changedValue,
       this.label,
       this.isTextObscured = false,
       this.validator,
-      this.hint})
+      this.hint,
+      this.controller})
       : super(key: key);
 
   @override
@@ -24,6 +25,7 @@ class MyFormInput extends StatelessWidget {
       obscureText: isTextObscured,
       validator: validator,
       cursorColor: CustomColors.purple,
+      controller: controller,
       decoration: InputDecoration(
           labelText: label,
           hintText: hint,
