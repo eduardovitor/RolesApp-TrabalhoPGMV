@@ -3,15 +3,17 @@ class Roles {
   late String local_curto;
   late String descricao;
   late String criador;
-  late String obs;
+  late String? obs;
   late String data;
   late String horario;
   late double custos;
   late String cep;
   late String rua;
+  late String cidade;
+  late String estado;
   late String bairro;
-  late String comp;
-  late String? numero;
+  late String? comp;
+  late String numero;
   late String imagem_local;
   late int idademin;
   late int? visualizacoes;
@@ -20,15 +22,17 @@ class Roles {
       {required this.nome_role,
       required this.descricao,
       required this.criador,
-      required this.obs,
+      this.obs,
       required this.data,
       required this.horario,
       required this.custos,
       required this.cep,
       required this.rua,
       required this.bairro,
-      required this.comp,
-      this.numero,
+      this.comp,
+      required this.cidade,
+      required this.estado,
+      required this.numero,
       required this.imagem_local,
       required this.idademin,
       required this.local_curto,
@@ -47,11 +51,13 @@ class Roles {
     rua = json['rua'];
     bairro = json['bairro'];
     comp = json['comp'];
-    numero = json['numero'];
+    numero = json['num'];
     imagem_local = json['imagem_local'];
     idademin = json['idademin'];
     local_curto = json['local_curto'];
     visualizacoes = json['visualizacoes'];
     confirmacoes = json['confirmacoes'];
+    cidade = json['cidade'];
+    estado = json['estado'];
   }
 }

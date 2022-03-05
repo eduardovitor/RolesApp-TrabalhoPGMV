@@ -23,4 +23,37 @@ class RoleDao {
 
     return list;
   }
+
+  Future<bool> cadastrarRole(Roles role) async {
+    DatabaseHelper databaseHelper = DatabaseHelper();
+    Database db = await databaseHelper.db;
+    String sql =
+        "INSERT INTO role (criador, nome_role, imagem_local, descricao, local_curto, obs, data, horario, custos, cep, cidade, estado, rua, bairro, comp, num, idademin, visualizacoes, confirmacoes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    final result = await db.rawInsert(sql, [
+      role.criador,
+      role.nome_role,
+      role.imagem_local,
+      role.descricao,
+      role.local_curto,
+      role.obs,
+      role.data,
+      role.horario,
+      role.custos,
+      role.cep,
+      role.cidade,
+      role.estado,
+      role.rua,
+      role.bairro,
+      role.comp,
+      role.numero,
+      role.idademin,
+      0,
+      0
+    ]);
+    if (result > 0) {
+      return true;
+    }
+    await Future.delayed(const Duration(seconds: 3));
+    return false;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rolesapp/role_details.dart';
 
 import 'custom_colors.dart';
 import 'domain/roles.dart';
@@ -16,6 +17,7 @@ class _CardRoleState extends State<CardRole> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+        onTap: onTap,
         child: Card(
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -76,6 +78,15 @@ class _CardRoleState extends State<CardRole> {
         ),
         buildRowViewsPeople()
       ],
+    );
+  }
+
+  onTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RoleDetails(role: role),
+      ),
     );
   }
 }
