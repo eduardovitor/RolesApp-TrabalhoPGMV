@@ -103,7 +103,7 @@ class _RoleDetailsState extends State<RoleDetails> {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          const Icon(Icons.calendar_month),
+          const Icon(Icons.calendar_today),
           const SizedBox(width: 2),
           Text(role.data + ', ' + role.horario,
               style: const TextStyle(
