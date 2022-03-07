@@ -1,9 +1,11 @@
 import 'package:rolesapp/cadastro.dart';
 import 'package:rolesapp/custom_colors.dart';
+import 'package:rolesapp/data/cep_api.dart';
 import 'package:rolesapp/data/usuario_dao.dart';
 import 'package:rolesapp/myforminput.dart';
 import 'package:flutter/material.dart';
 
+import 'domain/cep.dart';
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -73,7 +75,6 @@ class _LoginState extends State<Login> {
   }
 
   void onPressed() async {
-
     bool isValid = _formkey.currentState!.validate();
     bool user_exists =
         await UsuarioDao().login(controllerEmail.text, controllerSenha.text);

@@ -4,6 +4,8 @@ import 'package:rolesapp/maps_page.dart';
 import 'package:rolesapp/myforminput.dart';
 
 import 'custom_colors.dart';
+import 'data/cep_api.dart';
+import 'domain/cep.dart';
 import 'domain/roles.dart';
 import 'geocoding_api.dart';
 
@@ -69,10 +71,18 @@ class _RoleDetailsState extends State<RoleDetails> {
 
   buildImagemRole() {
     return Padding(
-      padding: const EdgeInsets.all(2),
-      child: Center(
-          child: Image.network(role.imagem_local, height: 200, width: 200)),
-    );
+        padding: const EdgeInsets.all(2),
+        child: Center(
+          child: mostrarImagem(),
+        ));
+  }
+
+  mostrarImagem() {
+    if (role.imagem_local!.isEmpty) {
+      return const Placeholder(fallbackHeight: 200, fallbackWidth: 200);
+    } else {
+      return Image.network(role.imagem_local!, height: 200, width: 200);
+    }
   }
 
   buildObs() {
@@ -159,15 +169,11 @@ class _RoleDetailsState extends State<RoleDetails> {
   }
 
   getLocation() async {
-    String busca = role.rua +
-        ' ' +
-        role.bairro +
-        ' ' +
-        role.numero +
-        ' ' +
-        role.cidade +
-        ' ' +
-        role.estado;
+    CepApi cepapi = CepApi();
+    Cep cep;
+    cep = await cepapi.getCep(role.cep);
+    var busca = cep.logradouro + ' ' + cep.bairro + ' ' + cep.localidade;
+    print(busca);
     LatLng local = await GeocodingApi().buscarLocalizacaoPorEnd(busca);
     return local;
   }

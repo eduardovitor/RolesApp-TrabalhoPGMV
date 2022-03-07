@@ -28,7 +28,7 @@ class RoleDao {
     DatabaseHelper databaseHelper = DatabaseHelper();
     Database db = await databaseHelper.db;
     String sql =
-        "INSERT INTO role (criador, nome_role, imagem_local, descricao, local_curto, obs, data, horario, custos, cep, cidade, estado, rua, bairro, comp, num, idademin, visualizacoes, confirmacoes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        "INSERT INTO role (criador, nome_role, imagem_local, descricao, local_curto, obs, data, horario, custos, cep, idademin, visualizacoes, confirmacoes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?);";
     final result = await db.rawInsert(sql, [
       role.criador,
       role.nome_role,
@@ -40,12 +40,6 @@ class RoleDao {
       role.horario,
       role.custos,
       role.cep,
-      role.cidade,
-      role.estado,
-      role.rua,
-      role.bairro,
-      role.comp,
-      role.numero,
       role.idademin,
       0,
       0

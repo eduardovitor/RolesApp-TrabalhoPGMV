@@ -37,12 +37,6 @@ class _MyFormState extends State<MyForm> {
   TextEditingController controllerObservacoes = TextEditingController();
   TextEditingController controllerCEP = TextEditingController();
   TextEditingController controllerImagem = TextEditingController();
-  TextEditingController controllerEstado = TextEditingController();
-  TextEditingController controllerCidade = TextEditingController();
-  TextEditingController controllerRua = TextEditingController();
-  TextEditingController controllerBairro = TextEditingController();
-  TextEditingController controllerNumero = TextEditingController();
-  TextEditingController controllerComplemento = TextEditingController();
   TextEditingController controllerIdadeMin = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -95,7 +89,7 @@ class _MyFormState extends State<MyForm> {
           const SizedBox(height: 15),
           MyFormInput(
               label: 'CEP',
-              hint: 'Digite o CEP do local',
+              hint: 'Digite o CEP do local sem espaços ou hifens',
               validator: checkFieldEmpty,
               controller: controllerCEP),
           const SizedBox(height: 15),
@@ -103,43 +97,7 @@ class _MyFormState extends State<MyForm> {
               label: 'Imagem do local',
               hint:
                   'Copie uma url de uma imagem da internet que represente o local',
-              validator: checkFieldEmpty,
               controller: controllerImagem),
-          const SizedBox(height: 15),
-          MyFormInput(
-              label: 'Estado',
-              hint: 'Digite o nome do estado por extenso',
-              validator: checkFieldEmpty,
-              controller: controllerEstado),
-          const SizedBox(height: 15),
-          MyFormInput(
-              label: 'Cidade',
-              hint: 'Digite o nome da cidade',
-              validator: checkFieldEmpty,
-              controller: controllerCidade),
-          const SizedBox(height: 15),
-          MyFormInput(
-              label: 'Rua',
-              hint: 'Digite a rua do local',
-              validator: checkFieldEmpty,
-              controller: controllerRua),
-          const SizedBox(height: 15),
-          MyFormInput(
-              label: 'Bairro',
-              hint: 'Digite o bairro do local',
-              validator: checkFieldEmpty,
-              controller: controllerBairro),
-          const SizedBox(height: 15),
-          MyFormInput(
-              label: 'Número',
-              hint: 'Digite o número do local',
-              validator: checkFieldEmpty,
-              controller: controllerNumero),
-          const SizedBox(height: 15),
-          MyFormInput(
-              label: 'Complemento (opcional)',
-              hint: 'Digite algum complemento',
-              controller: controllerComplemento),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Idade mínima',
@@ -171,17 +129,10 @@ class _MyFormState extends State<MyForm> {
         obs: controllerObservacoes.text,
         cep: controllerCEP.text,
         imagem_local: controllerImagem.text,
-        estado: controllerEstado.text,
-        cidade: controllerCidade.text,
-        rua: controllerRua.text,
-        bairro: controllerBairro.text,
-        numero: controllerNumero.text,
-        comp: controllerComplemento.text,
         idademin: int.parse(controllerIdadeMin.text));
     bool isValid = _formkey.currentState!.validate();
-    bool role_cadastrado = await RoleDao().cadastrarRole(role);
-    if (isValid && role_cadastrado) {
-      print('Rolê cadastrado');
+    if (isValid) {
+      await RoleDao().cadastrarRole(role);
     }
   }
 }
