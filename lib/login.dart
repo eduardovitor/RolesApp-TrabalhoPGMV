@@ -3,6 +3,7 @@ import 'package:rolesapp/custom_colors.dart';
 import 'package:rolesapp/data/usuario_dao.dart';
 import 'package:rolesapp/myforminput.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home.dart';
 
@@ -17,9 +18,24 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerSenha = TextEditingController();
+
+  late SharedPreferences loginData;
+  late SharedPreferences newUser;
+
   @override
   void initState() {
     super.initState();
+    hasLogged();
+  }
+
+  void hasLogged() async {
+    loginData = await SharedPreferences.getInstance();
+    newUser = (loginData.getBool('login') ?? true) as SharedPreferences;
+    print(newUser);
+    if (newUser == false) {
+      Navigator.pushReplacement(
+          context, new MaterialPageRoute(builder: (context) => Home()));
+    }
   }
 
   @override
@@ -77,6 +93,8 @@ class _LoginState extends State<Login> {
     bool user_exists =
         await UsuarioDao().login(controllerEmail.text, controllerSenha.text);
     if (isValid && user_exists) {
+      loginData.setBool('login', false);
+      loginData.setString('email', controllerEmail.text);
       pushHomePage();
     }
   }

@@ -1,6 +1,7 @@
 import 'package:rolesapp/create_role.dart';
 import 'package:rolesapp/feed.dart';
 import 'package:rolesapp/perfil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late SharedPreferences loginData;
+  late SharedPreferences email;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initial();
+  }
+
+  void initial() async {
+    loginData = await SharedPreferences.getInstance();
+    setState(() {
+      email = loginData.getString('email') as SharedPreferences;
+    });
+  }
+
   @override
   int _selectedIndex = 0;
   Widget build(BuildContext context) {
@@ -52,6 +70,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+//logindata.setBool('login', true);
   _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
