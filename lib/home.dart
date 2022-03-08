@@ -14,21 +14,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late SharedPreferences loginData;
-  late SharedPreferences email;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    initial();
-  }
-
-  void initial() async {
-    loginData = await SharedPreferences.getInstance();
-    setState(() {
-      email = loginData.getString('email') as SharedPreferences;
-    });
   }
 
   @override

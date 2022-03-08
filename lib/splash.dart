@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rolesapp/home.dart';
 import 'package:rolesapp/login.dart';
+
+import 'data/shared_preferences_helper.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -12,13 +15,19 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
+    _loadData();
   }
 
-  _navigateToHome() async {
-    await Future.delayed(Duration(milliseconds: 5000), () {});
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Login()));
+  Future<void> _loadData() async {
+    SharedPreferencesHelper sharedPref = SharedPreferencesHelper();
+    bool isLogged = await sharedPref.getUserData();
+
+    await Future.delayed(const Duration(seconds: 3));
+    if (isLogged) {
+      pushNavigator(const Home());
+    } else {
+      pushNavigator(const Login());
+    }
   }
 
   @override
@@ -31,13 +40,21 @@ class _SplashState extends State<Splash> {
           width: 120.0,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image:
-                  Image(image: AssetImage('assets/images/qualrole.png')).image,
+              image: Image(image: AssetImage('assets/qualrole.png')).image,
               fit: BoxFit.fill,
             ),
             shape: BoxShape.circle,
           ),
         )),
+      ),
+    );
+  }
+
+  void pushNavigator(Widget widget) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
       ),
     );
   }
