@@ -66,7 +66,7 @@ class _CardRoleState extends State<CardRole> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Image.network(role.imagem_local, height: 150, width: 150),
+        mostrarImagem(),
         buildRowDataHorario(),
         Text(
           role.local_curto,
@@ -79,6 +79,14 @@ class _CardRoleState extends State<CardRole> {
         buildRowViewsPeople()
       ],
     );
+  }
+
+  mostrarImagem() {
+    if (role.imagem_local!.isEmpty) {
+      return const Placeholder(fallbackHeight: 150, fallbackWidth: 150);
+    } else {
+      return Image.network(role.imagem_local!, height: 150, width: 150);
+    }
   }
 
   onTap() {
