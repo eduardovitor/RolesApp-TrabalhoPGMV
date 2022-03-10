@@ -1,5 +1,5 @@
 import 'package:rolesapp/cadastro.dart';
-import 'package:rolesapp/custom_colors.dart';
+import 'package:rolesapp/custom_colors_singleton.dart';
 import 'package:rolesapp/data/cep_api.dart';
 import 'package:rolesapp/data/usuario_dao.dart';
 import 'package:rolesapp/myforminput.dart';
@@ -21,7 +21,6 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerSenha = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -29,7 +28,8 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: buildBody(), backgroundColor: CustomColors.gray);
+    return Scaffold(
+        body: buildBody(), backgroundColor: CustomColorsSing().gray);
   }
 
   buildBody() {
@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(150, 40),
-                primary: CustomColors.purple,
+                primary: CustomColorsSing().purple,
                 onPrimary: Colors
                     .white, // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),)
               ),
@@ -65,7 +65,7 @@ class _LoginState extends State<Login> {
               child: const Text("Entrar")),
           TextButton(
               style: TextButton.styleFrom(
-                primary: CustomColors.black,
+                primary: CustomColorsSing().black,
               ),
               onPressed: () {
                 Navigator.push(
@@ -126,7 +126,7 @@ class _CheckButtonWidgetState extends State<CheckButtonWidget> {
         MaterialState.hovered,
         MaterialState.focused,
       };
-      return CustomColors.purple;
+      return CustomColorsSing().purple;
     }
 
     return Checkbox(

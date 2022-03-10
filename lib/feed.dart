@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rolesapp/card_role.dart';
 import 'package:rolesapp/data/role_dao.dart';
 
-import 'custom_colors.dart';
+import 'custom_colors_singleton.dart';
 import 'domain/roles.dart';
 
 class Feed extends StatefulWidget {

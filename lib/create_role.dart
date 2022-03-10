@@ -1,7 +1,8 @@
-import 'package:rolesapp/custom_colors.dart';
+import 'package:rolesapp/custom_colors_singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:rolesapp/data/role_dao.dart';
 import 'package:rolesapp/domain/roles.dart';
+import 'package:rolesapp/textcontroller_role_facade.dart';
 
 import 'myforminput.dart';
 
@@ -28,16 +29,7 @@ class MyForm extends StatefulWidget {
 
 class _MyFormState extends State<MyForm> {
   final _formkey = GlobalKey<FormState>();
-  TextEditingController controllerNome = TextEditingController();
-  TextEditingController controllerLocalcurto = TextEditingController();
-  TextEditingController controllerDescricao = TextEditingController();
-  TextEditingController controllerData = TextEditingController();
-  TextEditingController controllerHorario = TextEditingController();
-  TextEditingController controllerCustos = TextEditingController();
-  TextEditingController controllerObservacoes = TextEditingController();
-  TextEditingController controllerCEP = TextEditingController();
-  TextEditingController controllerImagem = TextEditingController();
-  TextEditingController controllerIdadeMin = TextEditingController();
+  TextControllerRoleFacade textControllers = TextControllerRoleFacade();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -48,67 +40,67 @@ class _MyFormState extends State<MyForm> {
             label: 'Nome',
             hint: 'Digite o nome',
             validator: checkFieldEmpty,
-            controller: controllerNome,
+            controller: textControllers.controllerNome,
           ),
           const SizedBox(height: 15),
           MyFormInput(
             label: 'Local curto',
             hint: 'Digite o local de forma curta',
             validator: checkFieldEmpty,
-            controller: controllerLocalcurto,
+            controller: textControllers.controllerLocalcurto,
           ),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Descrição',
               hint: 'Digite a descrição',
               validator: checkFieldEmpty,
-              controller: controllerDescricao),
+              controller: textControllers.controllerDescricao),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Data',
               hint: 'Digite a data',
               validator: checkFieldEmpty,
-              controller: controllerData),
+              controller: textControllers.controllerData),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Horário',
               hint: 'Digite o horário',
               validator: checkFieldEmpty,
-              controller: controllerHorario),
+              controller: textControllers.controllerHorario),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Custos',
               hint: 'Digite qual o custo do rolê',
               validator: checkFieldEmpty,
-              controller: controllerCustos),
+              controller: textControllers.controllerCustos),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Observações (opcional)',
               hint: 'Digite alguma observação relevante',
-              controller: controllerObservacoes),
+              controller: textControllers.controllerObservacoes),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'CEP',
               hint: 'Digite o CEP do local sem espaços ou hifens',
               validator: checkFieldEmpty,
-              controller: controllerCEP),
+              controller: textControllers.controllerCEP),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Imagem do local',
               hint:
                   'Copie uma url de uma imagem da internet que represente o local',
-              controller: controllerImagem),
+              controller: textControllers.controllerImagem),
           const SizedBox(height: 15),
           MyFormInput(
               label: 'Idade mínima',
               hint: 'Digite a idade mínima',
               validator: checkFieldEmpty,
-              controller: controllerIdadeMin),
+              controller: textControllers.controllerIdadeMin),
           const SizedBox(height: 15),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(150, 40),
-                primary: CustomColors.purple,
+                primary: CustomColorsSing().purple,
                 onPrimary: Colors.white,
                 //  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
               ),
@@ -120,16 +112,16 @@ class _MyFormState extends State<MyForm> {
   void onPressed() async {
     Roles role = Roles(
         criador: 'Eduardo Vitor',
-        nome_role: controllerNome.text,
-        local_curto: controllerLocalcurto.text,
-        descricao: controllerDescricao.text,
-        data: controllerData.text,
-        horario: controllerHorario.text,
-        custos: double.parse(controllerCustos.text),
-        obs: controllerObservacoes.text,
-        cep: controllerCEP.text,
-        imagem_local: controllerImagem.text,
-        idademin: int.parse(controllerIdadeMin.text));
+        nome_role: textControllers.controllerNome.text,
+        local_curto: textControllers.controllerLocalcurto.text,
+        descricao: textControllers.controllerDescricao.text,
+        data: textControllers.controllerData.text,
+        horario: textControllers.controllerHorario.text,
+        custos: double.parse(textControllers.controllerCustos.text),
+        obs: textControllers.controllerObservacoes.text,
+        cep: textControllers.controllerCEP.text,
+        imagem_local: textControllers.controllerImagem.text,
+        idademin: int.parse(textControllers.controllerIdadeMin.text));
     bool isValid = _formkey.currentState!.validate();
     if (isValid) {
       await RoleDao().cadastrarRole(role);

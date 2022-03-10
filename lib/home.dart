@@ -3,7 +3,7 @@ import 'package:rolesapp/feed.dart';
 import 'package:rolesapp/perfil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'custom_colors.dart';
+import 'custom_colors_singleton.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -33,8 +33,8 @@ class _HomeState extends State<Home> {
       body: Center(child: _pages.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: CustomColors.purple,
-        unselectedItemColor: CustomColors.DimGray,
+        selectedItemColor: CustomColorsSing().purple,
+        unselectedItemColor: CustomColorsSing().DimGray,
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[

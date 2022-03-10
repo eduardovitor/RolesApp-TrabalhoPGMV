@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rolesapp/maps_page.dart';
 import 'package:rolesapp/myforminput.dart';
 
-import 'custom_colors.dart';
+import 'custom_colors_singleton.dart';
 import 'data/cep_api.dart';
 import 'domain/cep.dart';
 import 'domain/roles.dart';
@@ -61,8 +61,8 @@ class _RoleDetailsState extends State<RoleDetails> {
       padding: const EdgeInsets.all(2),
       child: Center(
           child: Text(role.nome_role,
-              style: const TextStyle(
-                color: CustomColors.DimGray,
+              style: TextStyle(
+                color: CustomColorsSing().DimGray,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ))),
@@ -100,8 +100,8 @@ class _RoleDetailsState extends State<RoleDetails> {
       child: Align(
           alignment: Alignment.centerLeft,
           child: Text(text,
-              style: const TextStyle(
-                color: CustomColors.DimGray,
+              style: TextStyle(
+                color: CustomColorsSing().DimGray,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ))),
@@ -116,8 +116,8 @@ class _RoleDetailsState extends State<RoleDetails> {
           const Icon(Icons.calendar_today),
           const SizedBox(width: 2),
           Text(role.data + ', ' + role.horario,
-              style: const TextStyle(
-                color: CustomColors.DimGray,
+              style: TextStyle(
+                color: CustomColorsSing().DimGray,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               )),
@@ -125,8 +125,8 @@ class _RoleDetailsState extends State<RoleDetails> {
           const Icon(Icons.monetization_on),
           const SizedBox(width: 2),
           Text(role.custos.toString(),
-              style: const TextStyle(
-                color: CustomColors.DimGray,
+              style: TextStyle(
+                color: CustomColorsSing().DimGray,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ))
@@ -143,8 +143,8 @@ class _RoleDetailsState extends State<RoleDetails> {
           const Icon(Icons.person),
           const SizedBox(width: 2),
           Text(role.criador,
-              style: const TextStyle(
-                color: CustomColors.DimGray,
+              style: TextStyle(
+                color: CustomColorsSing().DimGray,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ))
@@ -155,7 +155,7 @@ class _RoleDetailsState extends State<RoleDetails> {
 
   buildBotaoLocalizacao() {
     return FloatingActionButton(
-        backgroundColor: CustomColors.purple,
+        backgroundColor: CustomColorsSing().purple,
         onPressed: () async {
           var local = await getLocation();
           Navigator.push(

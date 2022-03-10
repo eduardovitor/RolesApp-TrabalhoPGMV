@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_colors.dart';
+import 'custom_colors_singleton.dart';
 import 'myforminput.dart';
 
 class Perfil extends StatefulWidget {
@@ -80,7 +80,7 @@ class _MyFormState extends State<MyForm> {
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(150, 40),
-                primary: CustomColors.purple,
+                primary: CustomColorsSing().purple,
                 onPrimary: Colors.white,
                 //   shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
               ),

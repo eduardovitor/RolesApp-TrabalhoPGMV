@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rolesapp/role_details.dart';
 
-import 'custom_colors.dart';
+import 'custom_colors_singleton.dart';
 import 'domain/roles.dart';
 
 class CardRole extends StatefulWidget {
@@ -52,16 +52,16 @@ class _CardRoleState extends State<CardRole> {
       children: [
         Text(
           role.nome_role,
-          style: const TextStyle(
-            color: CustomColors.DimGray,
+          style: TextStyle(
+            color: CustomColorsSing().DimGray,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           role.criador,
-          style: const TextStyle(
-            color: CustomColors.DimGray,
+          style: TextStyle(
+            color: CustomColorsSing().DimGray,
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
@@ -70,8 +70,8 @@ class _CardRoleState extends State<CardRole> {
         buildRowDataHorario(),
         Text(
           role.local_curto,
-          style: const TextStyle(
-            color: CustomColors.DimGray,
+          style: TextStyle(
+            color: CustomColorsSing().DimGray,
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),

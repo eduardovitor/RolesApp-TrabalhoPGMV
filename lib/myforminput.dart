@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rolesapp/custom_colors.dart';
+import 'package:rolesapp/custom_colors_singleton.dart';
 
 class MyFormInput extends StatelessWidget {
   // Declare your custom vars, including your validator function
@@ -24,16 +24,16 @@ class MyFormInput extends StatelessWidget {
     return TextFormField(
       obscureText: isTextObscured,
       validator: validator,
-      cursorColor: CustomColors.purple,
+      cursorColor: CustomColorsSing().purple,
       controller: controller,
       decoration: InputDecoration(
           labelText: label,
           hintText: hint,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
-          focusedBorder: const OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.zero,
-              borderSide: BorderSide(color: CustomColors.purple))),
+              borderSide: BorderSide(color: CustomColorsSing().purple))),
     );
   }
 }
