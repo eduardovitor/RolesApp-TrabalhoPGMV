@@ -1,4 +1,4 @@
-class Usuarios {
+class Usuario {
   late String apelido;
   late String nome;
   late String email;
@@ -9,7 +9,7 @@ class Usuarios {
   late String fuma;
   late String bebe;
 
-  Usuarios(
+  Usuario(
       {required this.apelido,
       required this.nome,
       required this.email,
@@ -20,7 +20,7 @@ class Usuarios {
       required this.fuma,
       required this.bebe});
 
-  Usuarios.fromJson(Map<String, dynamic> json) {
+  Usuario.fromJson(Map<String, dynamic> json) {
     apelido = json['apelido'];
     nome = json['nome'];
     email = json['email'];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'custom_colors_singleton.dart';
-import 'myforminput.dart';
+import '../Colors/custom_colors_singleton.dart';
+import '../Widget/myforminput.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);

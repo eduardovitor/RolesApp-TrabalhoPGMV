@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:rolesapp/maps_page.dart';
-import 'package:rolesapp/myforminput.dart';
+import 'package:rolesapp/Controller/api_controller.dart';
 
-import 'custom_colors_singleton.dart';
-import 'data/cep_api.dart';
-import 'domain/cep.dart';
-import 'domain/roles.dart';
-import 'geocoding_api.dart';
+import '../Colors/custom_colors_singleton.dart';
+import '../Model/cep.dart';
+import '../Model/role.dart';
+import '../Widget/myforminput.dart';
+import 'maps_page.dart';
 
 class RoleDetails extends StatefulWidget {
-  final Roles role;
+  final Role role;
   const RoleDetails({Key? key, required this.role}) : super(key: key);
 
   @override
@@ -18,7 +17,7 @@ class RoleDetails extends StatefulWidget {
 }
 
 class _RoleDetailsState extends State<RoleDetails> {
-  Roles get role => widget.role;
+  Role get role => widget.role;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,12 +168,12 @@ class _RoleDetailsState extends State<RoleDetails> {
   }
 
   getLocation() async {
-    CepApi cepapi = CepApi();
+    ApiController api_controller = ApiController();
     Cep cep;
-    cep = await cepapi.getCep(role.cep);
+    cep = await api_controller.cep_api.getCep(role.cep);
     var busca = cep.logradouro + ' ' + cep.bairro + ' ' + cep.localidade;
-    print(busca);
-    LatLng local = await GeocodingApi().buscarLocalizacaoPorEnd(busca);
+    LatLng local =
+        await api_controller.geocod_api.buscarLocalizacaoPorEnd(busca);
     return local;
   }
 }

@@ -1,13 +1,10 @@
-import 'package:rolesapp/cadastro.dart';
-import 'package:rolesapp/custom_colors_singleton.dart';
-import 'package:rolesapp/data/cep_api.dart';
-import 'package:rolesapp/data/usuario_dao.dart';
-import 'package:rolesapp/myforminput.dart';
 import 'package:flutter/material.dart';
+import 'package:rolesapp/Controller/usuario_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'data/shared_preferences_helper.dart';
-import 'domain/cep.dart';
+import '../Colors/custom_colors_singleton.dart';
+import '../Preferences/shared_preferences_helper.dart';
+import '../Widget/myforminput.dart';
+import 'cadastro.dart';
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -79,8 +76,8 @@ class _LoginState extends State<Login> {
 
   void onPressed() async {
     bool isValid = _formkey.currentState!.validate();
-    bool user_exists =
-        await UsuarioDao().login(controllerEmail.text, controllerSenha.text);
+    bool user_exists = await UsuarioController()
+        .login(controllerEmail.text, controllerSenha.text);
     if (isValid && user_exists) {
       SharedPreferencesHelper sharedPref = SharedPreferencesHelper();
       sharedPref.setUserData(true);

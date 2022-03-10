@@ -1,12 +1,10 @@
-import 'package:rolesapp/textcontroller_cad_facade.dart';
-
-import 'custom_colors_singleton.dart';
 import 'package:flutter/material.dart';
-
-import 'data/usuario_dao.dart';
-import 'domain/usuarios.dart';
+import 'package:rolesapp/Controller/usuario_controller.dart';
+import '../Colors/custom_colors_singleton.dart';
+import '../Model/usuario.dart';
+import '../TextControllerHelpers/textcontroller_cad_facade.dart';
+import '../Widget/myforminput.dart';
 import 'home.dart';
-import 'myforminput.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -105,7 +103,7 @@ class _CadastroState extends State<Cadastro> {
   }
 
   void onPressed() async {
-    Usuarios usuario = Usuarios(
+    Usuario usuario = Usuario(
         apelido: textControllers.controllerApelido.text,
         bebe: textControllers.controllerBebe.text,
         datanasc: textControllers.controllerDataNasc.text,
@@ -116,7 +114,7 @@ class _CadastroState extends State<Cadastro> {
         senha: textControllers.controllerSenha.text,
         url_imagem: textControllers.controllerUrl.text);
     bool isValid = _formkey.currentState!.validate();
-    bool user_cadastrado = await UsuarioDao().cadastrarUsuario(usuario);
+    bool user_cadastrado = await UsuarioController().cadastrarUsuario(usuario);
     if (isValid && user_cadastrado) {
       pushHomePage();
     }

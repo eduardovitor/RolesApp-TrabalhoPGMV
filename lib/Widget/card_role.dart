@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rolesapp/role_details.dart';
 
-import 'custom_colors_singleton.dart';
-import 'domain/roles.dart';
+import '../Colors/custom_colors_singleton.dart';
+import '../Model/role.dart';
+import '../View/role_details.dart';
 
 class CardRole extends StatefulWidget {
-  final Roles role;
+  final Role role;
   const CardRole({Key? key, required this.role}) : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class CardRole extends StatefulWidget {
 }
 
 class _CardRoleState extends State<CardRole> {
-  Roles get role => widget.role;
+  Role get role => widget.role;
   @override
   Widget build(BuildContext context) {
     return InkWell(

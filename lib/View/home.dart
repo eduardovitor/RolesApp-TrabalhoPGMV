@@ -1,10 +1,8 @@
-import 'package:rolesapp/create_role.dart';
-import 'package:rolesapp/feed.dart';
-import 'package:rolesapp/perfil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'custom_colors_singleton.dart';
 import 'package:flutter/material.dart';
+import '../Colors/custom_colors_singleton.dart';
+import 'create_role.dart';
+import 'feed.dart';
+import 'perfil.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

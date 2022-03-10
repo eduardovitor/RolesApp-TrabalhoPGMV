@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rolesapp/home.dart';
-import 'package:rolesapp/login.dart';
 
-import 'data/shared_preferences_helper.dart';
+import '../Preferences/shared_preferences_helper.dart';
+import 'home.dart';
+import 'login.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

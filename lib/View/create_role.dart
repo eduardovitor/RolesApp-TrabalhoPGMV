@@ -1,10 +1,10 @@
-import 'package:rolesapp/custom_colors_singleton.dart';
 import 'package:flutter/material.dart';
-import 'package:rolesapp/data/role_dao.dart';
-import 'package:rolesapp/domain/roles.dart';
-import 'package:rolesapp/textcontroller_role_facade.dart';
+import 'package:rolesapp/Controller/role_controller.dart';
 
-import 'myforminput.dart';
+import '../Colors/custom_colors_singleton.dart';
+import '../Model/role.dart';
+import '../TextControllerHelpers/textcontroller_role_facade.dart';
+import '../Widget/myforminput.dart';
 
 class CreateRole extends StatefulWidget {
   const CreateRole({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class _MyFormState extends State<MyForm> {
   }
 
   void onPressed() async {
-    Roles role = Roles(
+    Role role = Role(
         criador: 'Eduardo Vitor',
         nome_role: textControllers.controllerNome.text,
         local_curto: textControllers.controllerLocalcurto.text,
@@ -124,7 +124,7 @@ class _MyFormState extends State<MyForm> {
         idademin: int.parse(textControllers.controllerIdadeMin.text));
     bool isValid = _formkey.currentState!.validate();
     if (isValid) {
-      await RoleDao().cadastrarRole(role);
+      await RoleController().cadastrarRole(role);
     }
   }
 }

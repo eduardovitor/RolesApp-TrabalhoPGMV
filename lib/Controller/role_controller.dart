@@ -1,12 +1,12 @@
-import 'database_helper.dart';
-import '/domain/roles.dart';
+import '../Database/database_helper.dart';
+import '../Model/role.dart';
 import 'package:sqflite/sqflite.dart';
 
-class RoleDao {
+class RoleController {
   final String tableName = 'role';
 
-  Future<List<Roles>> findAll() async {
-    List<Roles> list = <Roles>[];
+  Future<List<Role>> findAll() async {
+    List<Role> list = <Role>[];
 
     DatabaseHelper databaseHelper = DatabaseHelper();
     Database db = await databaseHelper.db;
@@ -15,7 +15,7 @@ class RoleDao {
     final result = await db.rawQuery(sql);
 
     for (var json in result) {
-      Roles role = Roles.fromJson(json);
+      Role role = Role.fromJson(json);
       list.add(role);
     }
 
@@ -24,7 +24,7 @@ class RoleDao {
     return list;
   }
 
-  Future<bool> cadastrarRole(Roles role) async {
+  Future<bool> cadastrarRole(Role role) async {
     DatabaseHelper databaseHelper = DatabaseHelper();
     Database db = await databaseHelper.db;
     String sql =

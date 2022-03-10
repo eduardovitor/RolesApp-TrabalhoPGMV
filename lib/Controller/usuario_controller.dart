@@ -1,12 +1,12 @@
-import 'database_helper.dart';
-import '/domain/usuarios.dart';
+import '../Database/database_helper.dart';
+import '../Model/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 
-class UsuarioDao {
+class UsuarioController {
   final String tableName = 'usuario';
 
-  Future<List<Usuarios>> findAll() async {
-    List<Usuarios> list = <Usuarios>[];
+  Future<List<Usuario>> findAll() async {
+    List<Usuario> list = <Usuario>[];
 
     DatabaseHelper databaseHelper = DatabaseHelper();
     Database db = await databaseHelper.db;
@@ -15,7 +15,7 @@ class UsuarioDao {
     final result = await db.rawQuery(sql);
 
     for (var json in result) {
-      Usuarios usuario = Usuarios.fromJson(json);
+      Usuario usuario = Usuario.fromJson(json);
       list.add(usuario);
     }
 
@@ -36,7 +36,7 @@ class UsuarioDao {
     return false;
   }
 
-  Future<bool> cadastrarUsuario(Usuarios usuario) async {
+  Future<bool> cadastrarUsuario(Usuario usuario) async {
     DatabaseHelper databaseHelper = DatabaseHelper();
     Database db = await databaseHelper.db;
     String sql =

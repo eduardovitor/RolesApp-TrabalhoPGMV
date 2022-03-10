@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:rolesapp/domain/cep.dart';
+import '../Model/cep.dart';
 
 class CepApi {
   final String baseUrl = 'viacep.com.br';

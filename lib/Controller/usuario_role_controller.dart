@@ -1,8 +1,8 @@
-import 'database_helper.dart';
-import '/domain/usuario_role.dart';
+import '../Database/database_helper.dart';
+import '../Model/usuario_role.dart';
 import 'package:sqflite/sqflite.dart';
 
-class UsuarioRoleDao {
+class UsuarioRoleController {
   final String tableName = 'usuario_vai_role';
 
   Future<List<UsuarioRole>> findAll() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rolesapp/custom_colors_singleton.dart';
+
+import '../Colors/custom_colors_singleton.dart';
 
 class MyFormInput extends StatelessWidget {
   // Declare your custom vars, including your validator function

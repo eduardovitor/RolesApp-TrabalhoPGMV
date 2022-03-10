@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rolesapp/card_role.dart';
-import 'package:rolesapp/data/role_dao.dart';
+import 'package:rolesapp/Controller/role_controller.dart';
 
-import 'custom_colors_singleton.dart';
-import 'domain/roles.dart';
+import '../Model/role.dart';
+import '../Widget/card_role.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -13,12 +12,12 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-  late Future<List<Roles>> lista_roles;
+  late Future<List<Role>> lista_roles;
 
   @override
   void initState() {
     super.initState();
-    lista_roles = RoleDao().findAll();
+    lista_roles = RoleController().findAll();
   }
 
   @override
@@ -26,7 +25,7 @@ class _FeedState extends State<Feed> {
     return Scaffold(body: buildFutureBuilder());
   }
 
-  buildListView(List<Roles>? lista_roles) {
+  buildListView(List<Role>? lista_roles) {
     return ListView.builder(
       itemCount: lista_roles!.length,
       itemBuilder: (BuildContext context, int index) {
@@ -36,7 +35,7 @@ class _FeedState extends State<Feed> {
   }
 
   buildFutureBuilder() {
-    return FutureBuilder<List<Roles>>(
+    return FutureBuilder<List<Role>>(
       future: lista_roles,
       builder: (context, snapshot) {
         if (snapshot.hasData) {

@@ -1,4 +1,4 @@
-class Roles {
+class Role {
   late String nome_role;
   late String local_curto;
   late String descricao;
@@ -12,7 +12,7 @@ class Roles {
   late int idademin;
   late int? visualizacoes;
   late int? confirmacoes;
-  Roles(
+  Role(
       {required this.nome_role,
       required this.descricao,
       required this.criador,
@@ -27,7 +27,7 @@ class Roles {
       this.visualizacoes,
       this.confirmacoes});
 
-  Roles.fromJson(Map<String, dynamic> json) {
+  Role.fromJson(Map<String, dynamic> json) {
     nome_role = json['nome_role'];
     descricao = json['descricao'];
     criador = json['criador'];
