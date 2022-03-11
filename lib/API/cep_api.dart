@@ -17,6 +17,21 @@ class CepApi {
       var decodedResponse = json.decode(response.body);
       pacote = Cep.fromJson(decodedResponse);
     }
-    return pacote!;
+    try {
+      return pacote!;
+    } catch (e) {
+      Cep erro_cep = Cep(
+          cep: '0000',
+          bairro: '',
+          complemento: '',
+          ddd: '',
+          gia: '',
+          ibge: '',
+          localidade: '',
+          logradouro: '',
+          siafi: '',
+          uf: '');
+      return erro_cep;
+    }
   }
 }

@@ -41,7 +41,12 @@ class MyFormInput extends StatelessWidget {
 
 String? checkFieldEmpty(String? fieldContent) {
   //<-- add String? as a return type
+
   if (fieldContent == null || fieldContent.isEmpty) {
+    return 'Por favor digite algo';
+  }
+  var length = fieldContent.replaceAll(' ', '').length;
+  if (length == 0) {
     return 'Por favor digite algo';
   }
   return null;
