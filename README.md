@@ -1,5 +1,5 @@
 ## Testing the code
-### There is two options
+### There are two options
 #### Heroku
  - Using the link: https://rolesapp.herokuapp.com
  
