@@ -50,10 +50,10 @@ class DatabaseHelper {
     await db.execute(sql);
 
     sql =
-        "INSERT INTO usuario (apelido, nome, email, senha, datanasc, url_imagem, idade, fuma, bebe) VALUES ('Vampirinho', 'Carlinhos', 'carlos@gmail.com', '12345', '13/07/1995', 'https://upload.wikimedia.org/wikipedia/pt/6/6d/JeanLucPicard.jpg', 26, 'N', 'S');";
+        "INSERT INTO usuario (apelido, nome, email, senha, datanasc, url_imagem, idade, fuma, bebe) VALUES ('Carleto', 'Carlinhos', 'carlos@gmail.com', '12345', '13/07/1995', 'https://upload.wikimedia.org/wikipedia/pt/6/6d/JeanLucPicard.jpg', 26, 'N', 'S');";
     await db.execute(sql);
     sql =
-        "INSERT INTO usuario (apelido, nome, email, senha, datanasc, url_imagem, idade, fuma, bebe) VALUES ('La bella', 'Eduardo Vítor', 'eduvitor@gmail.com', '123', '13/03/1985', 'https://pbs.twimg.com/profile_images/1276471354724761601/2IL9V18-_400x400.jpg', 36, 'N', 'S');";
+        "INSERT INTO usuario (apelido, nome, email, senha, datanasc, url_imagem, idade, fuma, bebe) VALUES ('El grande', 'Eduardo Vítor', 'eduvitor@gmail.com', '123', '13/03/1985', 'https://pbs.twimg.com/profile_images/1276471354724761601/2IL9V18-_400x400.jpg', 36, 'N', 'S');";
     await db.execute(sql);
 
     // sql =
